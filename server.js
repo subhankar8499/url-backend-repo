@@ -9,7 +9,14 @@ const app = express();
 
 // Middleware
 app.use(express.json()); // Parse JSON requests
-app.use(cors()); // Allow frontend-backend communication
+app.use(cors({
+    origin: [
+      'http://localhost:3000', // Local dev
+      'https://url-frontend-repo.vercel.app'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }));
 
 // Connect to MongoDB
 connectDB();
